@@ -21,18 +21,10 @@ public class PlayerMovement : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 	}
 
-	// Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
         {
-	        
-	        
-	        
             // Debug.Log("direction: " + direction);
             // var camPos = cam.transform.forward;
             // camPos.y = 0;
@@ -45,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
             // direction.z = direction.z * Input.GetAxis("Vertical");
             direction = direction.normalized;
             // direction.y = 0;
-       
         }
     
         private void FixedUpdate()
@@ -55,8 +46,7 @@ public class PlayerMovement : MonoBehaviour
     
         private void Move()
         {
-    	
-    	    var speedVector = direction * movementSpeed;
+	        var speedVector = direction * movementSpeed;
             Debug.Log("direction: " + direction);
     	    rb.velocity = Vector3.Lerp(rb.velocity, speedVector, Time.fixedDeltaTime * damping);
     	    transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.fixedDeltaTime * turnSpeed);
