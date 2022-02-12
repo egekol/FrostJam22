@@ -1,24 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Main.Scripts.GamePlay;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	private CharacterController playerController;
 	private Vector3 direction;
-	public float movementSpeed;
-	public float animationVelocity;
-	public float damping;
-	private PlayerAnimationController animationController;
-	private Rigidbody rb;
-	public float animationDamping;
-	public float turnSpeed;
 
 	private void Awake()
 	{
-		animationController= GetComponent<PlayerAnimationController>();
-		rb = GetComponent<Rigidbody>();
+		playerController = GetComponent<CharacterController>();
 	}
 
 	// Start is called before the first frame update
@@ -30,10 +22,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
         {
-	        
-	        
-	        
-            // Debug.Log("direction: " + direction);
+            // Debug.Log("Horizontal: " + floatingJoystick.Horizontal);
             // var camPos = cam.transform.forward;
             // camPos.y = 0;
             // direction = ( floatingJoystick.Horizontal *cam.transform.right) +
@@ -55,13 +44,14 @@ public class PlayerMovement : MonoBehaviour
     
         private void Move()
         {
-    	
-    	    var speedVector = direction * movementSpeed;
-            Debug.Log("direction: " + direction);
-    	    rb.velocity = Vector3.Lerp(rb.velocity, speedVector, Time.fixedDeltaTime * damping);
-    	    transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.fixedDeltaTime * turnSpeed);
-    	    animationVelocity = rb.velocity.magnitude;
-    	    animationVelocity = Mathf.Lerp(animationVelocity, 20f, Time.fixedDeltaTime * animationDamping);
-    	    animationController.SetSpeed(animationVelocity);
+    	    playerController.Move(direction);
+    	    // var speedVector = direction * movementSpeed;
+    	    // rb.velocity = Vector3.Lerp(rb.velocity, speedVector, Time.fixedDeltaTime * damping);
+    	    // transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.fixedDeltaTime * turnSpeed);
+    	    // animationVelocity = rb.velocity.magnitude;
+    	    // animationVelocity = Mathf.Lerp(animationVelocity, 20f, Time.fixedDeltaTime * animationDamping);
+    	    // animationController.SetSpeed(animationVelocity);
+    	    // if(animationVelocity > 2.1 && animationController.isWaving)
+    	    // 	animationController.Wave(false);
         }
 }
