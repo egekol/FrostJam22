@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	private Vector3 direction;
+	[SerializeField] private Camera mainCamera;
 	public float movementSpeed;
 	public float animationVelocity;
 	public float damping;
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 	private Rigidbody rb;
 	public float animationDamping;
 	public float turnSpeed;
+	[SerializeField] private GameObject playerTorso;
+	public Vector3 positionToLook;
 
 	private void Awake()
 	{
@@ -37,9 +40,25 @@ public class PlayerMovement : MonoBehaviour
             // direction.z = direction.z * Input.GetAxis("Vertical");
             direction = direction.normalized;
             // direction.y = 0;
+            RotateTorso();
         }
-    
-        private void FixedUpdate()
+
+    private void RotateTorso()
+    {
+	    Ray camRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+	    Plane ground = new Plane(Vector3.up, Vector3.zero);
+	    float rayLength;
+
+	    if (ground.Raycast(camRay,out rayLength))
+	    {
+		    positionToLook = camRay.GetPoint(rayLength);
+		    Debug.DrawLine(camRay.origin,positionToLook,Color.black);
+		    positionToLook.y = playerTorso.transform.position.y;
+		    playerTorso.transform.LookAt(positionToLook);
+	    }
+    }
+
+    private void FixedUpdate()
         {
     	    Move();
         }
