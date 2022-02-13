@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityTemplateProjects.GamePlay;
 
 public class Monkee : MonoBehaviour
 {
@@ -85,6 +86,18 @@ public class Monkee : MonoBehaviour
     public void FollowTarget(Vector3 targetPosition)
     {
         agent.destination = targetPosition;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger0");
+        if(!other.attachedRigidbody)
+            return;
+        Debug.Log("Trigger1");
+        if(!other.attachedRigidbody.TryGetComponent(out Bullet bullet))
+            return;
+        Debug.Log("Trigger");
+        gameObject.SetActive(false);
     }
 }
 

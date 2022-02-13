@@ -66,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
         private void Move()
         {
 	        var speedVector = direction * movementSpeed;
-            Debug.Log("direction: " + direction);
     	    rb.velocity = Vector3.Lerp(rb.velocity, speedVector, Time.fixedDeltaTime * damping);
     	    transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.fixedDeltaTime * turnSpeed);
     	    animationVelocity = rb.velocity.magnitude;

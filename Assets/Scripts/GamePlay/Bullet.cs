@@ -13,7 +13,7 @@ namespace UnityTemplateProjects.GamePlay
         private void Update()
         {
             var speed = PlayerManager.instance.bulletSpeed * Time.deltaTime;
-            transform.forward+=(projectile.normalized*speed);
+            transform.Translate(projectile.normalized*speed);
         }
     }
 }
