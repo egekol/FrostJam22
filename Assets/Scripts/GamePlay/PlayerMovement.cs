@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 	public float animationDamping;
 	public float turnSpeed;
 	[SerializeField] private GameObject playerTorso;
-	public Vector3 positionToLook;
+	
 
 	private void Awake()
 	{
@@ -51,10 +51,10 @@ public class PlayerMovement : MonoBehaviour
 
 	    if (ground.Raycast(camRay,out rayLength))
 	    {
-		    positionToLook = camRay.GetPoint(rayLength);
-		    Debug.DrawLine(camRay.origin,positionToLook,Color.black);
-		    positionToLook.y = playerTorso.transform.position.y;
-		    playerTorso.transform.LookAt(positionToLook);
+		    PlayerManager.instance.positionToLook = camRay.GetPoint(rayLength);
+		    Debug.DrawLine(camRay.origin,PlayerManager.instance.positionToLook,Color.black);
+		    PlayerManager.instance.positionToLook.y = playerTorso.transform.position.y;
+		    playerTorso.transform.LookAt(PlayerManager.instance.positionToLook);
 	    }
     }
 

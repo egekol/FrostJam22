@@ -5,26 +5,32 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    private static PlayerManager _instance;
+    public GameObject player;
+    public static PlayerManager instance;
     public PlayerAnimationController playerAnimationController;
     public PlayerMovement playerMovement; 
+    public Vector3 positionToLook;
+    public Gun gun;
+
+    public float bulletSpeed = 5f; 
     private void Awake()
     {
-        if (_instance != null)
+        if (instance != null)
         {
             Destroy(gameObject);
         }
         else
         {
-            _instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
-        playerAnimationController = GetComponent<PlayerAnimationController>();
+        playerMovement = player.GetComponent<PlayerMovement>();
+        playerAnimationController = player.GetComponent<PlayerAnimationController>();
+        gun = player.GetComponentInChildren<Gun>();
     }
 
     // Update is called once per frame
