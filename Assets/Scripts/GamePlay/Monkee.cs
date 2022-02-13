@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityTemplateProjects.GamePlay;
@@ -56,7 +57,8 @@ public class Monkee : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        
+        target = PlayerManager.instance.player.transform;
+
     }
 
     private void Start()
@@ -90,14 +92,14 @@ public class Monkee : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger0");
-        if(!other.attachedRigidbody)
+        if (!other.attachedRigidbody)
             return;
-        Debug.Log("Trigger1");
         if(!other.attachedRigidbody.TryGetComponent(out Bullet bullet))
             return;
         Debug.Log("Trigger");
-        gameObject.SetActive(false);
+        Destroy(gameObject,.1f);
+        EnemyManager.instance.CheckEnemyCount();
+        Destroy(bullet.gameObject);
     }
 }
 

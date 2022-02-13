@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 	public float animationVelocity;
 	public float damping;
 	private PlayerAnimationController animationController;
-	private Rigidbody rb;
+	public Rigidbody rb;
 	public float animationDamping;
 	public float turnSpeed;
 	[SerializeField] private GameObject playerTorso;

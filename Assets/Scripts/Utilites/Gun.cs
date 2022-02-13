@@ -7,6 +7,8 @@ using UnityTemplateProjects.GamePlay;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private Bullet bulletPrefab;
+    public float fireDelay = .5f;
+    private float fireTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -18,10 +20,17 @@ public class Gun : MonoBehaviour
     void Update()
     {
         LookAtTartget();
-        if (Input.GetMouseButtonDown(0))
+        fireTimer += Time.deltaTime;
+        if (Input.GetMouseButton(0))
         {
-            Fire();
+            if (fireTimer>fireDelay)
+            {
+                Fire();
+                fireTimer = 0;
+            }
         }
+        
+        
     }
 
     private void LookAtTartget()
@@ -34,6 +43,5 @@ public class Gun : MonoBehaviour
         var position = transform.position;
         var bullet =Instantiate(bulletPrefab, position+transform.forward.normalized, quaternion.identity);
         bullet.projectile = PlayerManager.instance.positionToLook - position;
-        
     }
 }
