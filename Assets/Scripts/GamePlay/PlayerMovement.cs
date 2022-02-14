@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using _Main.Scripts.GamePlay;
 using UnityEngine;
+using UnityTemplateProjects.GamePlay;
+using UnityTemplateProjects.Managers;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		animationController= GetComponent<PlayerAnimationController>();
 		rb = GetComponent<Rigidbody>();
+		mainCamera = FindObjectOfType<Camera>();
 	}
 
 
@@ -71,5 +74,17 @@ public class PlayerMovement : MonoBehaviour
     	    animationVelocity = rb.velocity.magnitude;
     	    animationVelocity = Mathf.Lerp(animationVelocity, 20f, Time.fixedDeltaTime * animationDamping);
     	    animationController.SetSpeed(animationVelocity);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+	        if (!other.attachedRigidbody)
+		        return;
+	        if(!other.attachedRigidbody.TryGetComponent(out Monkee monkee))
+		        return;
+	        Debug.Log("GameOver");
+	        // Destroy(gameObject,.1f);
+	        LevelManager.instance.GameState = GameState.Lose;
+	        gameObject.SetActive(false);
         }
 }

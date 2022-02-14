@@ -30,6 +30,11 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameStart();
+    }
+
+    public void GameStart()
+    {
         Wave = 0;
         StartCoroutine(SpawnEnemy());
     }
@@ -58,6 +63,7 @@ public class EnemyManager : MonoBehaviour
         {
             _waveLevel = value;
             ResetWaveCounts();
+            UIManager.instance.StartCoroutine();
             StartCoroutine(SpawnEnemy());
         }
     }

@@ -22,12 +22,13 @@ public class PlayerManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
     }
     // Start is called before the first frame update
     void Start()
     {
+        
         playerMovement = player.GetComponent<PlayerMovement>();
         playerAnimationController = player.GetComponent<PlayerAnimationController>();
         gun = player.GetComponentInChildren<Gun>();
