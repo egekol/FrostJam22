@@ -35,7 +35,7 @@ public class EnemyManager : MonoBehaviour
 
     public void GameStart()
     {
-        Wave = 0;
+        Wave = PlayerPrefs.GetInt("WaveLevel");
         StartCoroutine(SpawnEnemy());
     }
 
@@ -62,6 +62,7 @@ public class EnemyManager : MonoBehaviour
         set
         {
             _waveLevel = value;
+            PlayerPrefs.SetInt("WaveLevel",value);
             ResetWaveCounts();
             UIManager.instance.StartCoroutine();
             StartCoroutine(SpawnEnemy());

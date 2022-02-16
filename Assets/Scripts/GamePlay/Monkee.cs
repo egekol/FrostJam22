@@ -5,11 +5,14 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityTemplateProjects.GamePlay;
+using UnityTemplateProjects.Utilites;
 
 public class Monkee : MonoBehaviour
 {
     public NavMeshAgent agent;
     [SerializeField] private Transform target;
+    [SerializeField] private GameObject monkeeModelDefault;
+    [SerializeField] private GameObject monkeeModelBroken;
     private MonkeeStatus _monkeeStatus;
 
     public MonkeeStatus MonkeeStatus
@@ -97,9 +100,20 @@ public class Monkee : MonoBehaviour
         if(!other.attachedRigidbody.TryGetComponent(out Bullet bullet))
             return;
         Debug.Log("Trigger");
-        Destroy(gameObject,.1f);
+        DestroyMesh();
+        Destroy(gameObject,5f);
         EnemyManager.instance.CheckEnemyCount();
         Destroy(bullet.gameObject);
+        Destroy(agent);
+        Destroy(this);
+    }
+
+    private void DestroyMesh()
+    {
+        var mesh = monkeeModelDefault;
+        // Debug.Log("mesh!!!!:  " + mesh);
+        Destroy(mesh);
+        monkeeModelBroken.SetActive(true);
     }
 }
 

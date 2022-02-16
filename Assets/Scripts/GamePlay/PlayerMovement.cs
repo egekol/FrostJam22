@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 	        Debug.Log("GameOver");
 	        // Destroy(gameObject,.1f);
 	        LevelManager.instance.GameState = GameState.Lose;
+	        PlayerPrefs.SetInt("WaveLevel",0);
 	        gameObject.SetActive(false);
         }
 }
