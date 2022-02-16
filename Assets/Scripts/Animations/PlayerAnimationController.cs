@@ -22,6 +22,7 @@ namespace _Main.Scripts.GamePlay
 		public void Awake()
 		{
 			_animator = GetComponentInChildren<Animator>();
+			Debug.Log("animator:"+ _animator.GetInstanceID());
 			SetupAnimationHashes();
 			// SetIdleMultiplier();
 		}
