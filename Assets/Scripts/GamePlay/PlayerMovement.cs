@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     	    rb.velocity = Vector3.Lerp(rb.velocity, speedVector, Time.fixedDeltaTime * damping);
     	    transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.fixedDeltaTime * turnSpeed);
     	    animationVelocity = rb.velocity.magnitude;
-    	    animationVelocity = Mathf.Lerp(animationVelocity, 20f, Time.fixedDeltaTime * animationDamping);
+    	    animationVelocity = Mathf.Lerp(animationVelocity, 30f, Time.fixedDeltaTime * animationDamping);
     	    animationController.SetSpeed(animationVelocity);
         }
 
